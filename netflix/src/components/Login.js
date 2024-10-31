@@ -21,8 +21,9 @@ const Login = () => {
     const loginHandler = () => {
         setIsLogin(!isLogin);
     }
-    const getInputData = async (e)=>{
-        e.preventDefault();
+
+    const getInputData = async function(e){
+        e.preventDefault();  //prevent the data from get uploaded to local server
         dispatch(setLoading(true));
         if(isLogin){
             //login
@@ -67,14 +68,16 @@ const Login = () => {
                 dispatch(setLoading(false));
             }
         }
+
+        // after submitting the credentials set all the credentials to Null:
         setFullName("");
         setEmail("");
         setPassword("");
     }
     
-    return (
+    return ( //to display header in this page : <Headre/>
         <div>
-            <Header />
+            <Header /> 
             <div className='absolute'>
                 <img className='w-[100vw] h-[100vh] bg-cover' src="https://assets.nflxext.com/ffe/siteui/vlv3/dc1cf82d-97c9-409f-b7c8-6ac1718946d6/14a8fe85-b6f4-4c06-8eaf-eccf3276d557/IN-en-20230911-popsignuptwoweeks-perspective_alpha_website_medium.jpg" alt="banner" />
             </div>
@@ -86,8 +89,8 @@ const Login = () => {
                     }
                     <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
                     <input value={password} onChange={(e)=>setPassword(e.target.value)} type='password' placeholder='Password' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
-                    <button type='submit' className='bg-red-600 mt-6 p-3 text-white rounded-sm font-medium'>{`${isLoading ? "loading...":(isLogin?"Login":"Signup")}`}</button>
-                    <p className='text-white mt-2'>{isLogin ? "New to Netflix?" : "Already have an account?"}<span onClick={loginHandler} className='ml-1 text-blue-900 font-medium cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></p>
+                    <button type='submit' className='bg-green-600 mt-6 p-3 text-white rounded-3xl font-bold'>{`${isLoading ? "loading...":(isLogin?"Login":"Signup")}`}</button>
+                    <p className='text-white mt-2'>{isLogin ? "New here?" : "User Already ?"}<span onClick={loginHandler} className='ml-1 text-blue-900 font-medium cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></p>
                 </div>
             </form>
         </div>

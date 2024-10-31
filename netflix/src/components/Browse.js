@@ -26,9 +26,9 @@ const Browse = () => {
             navigate("/");
         }
     }, []);
-    return (
+    return ( //to display header in this page : <Headre/>
         <div >
-            <Header />
+            <Header />   
             <div>
                 {
                     toggle ? <SearchMovie /> : (

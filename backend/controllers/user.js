@@ -54,20 +54,22 @@ export const Register = async (req,res) =>{
         const {fullName, email, password} = req.body;
         if(!fullName || !email || !password){
             return res.status(401).json({
-                message:"Invalid data",
+                message:"Enter right data",
                 success:false
             })
         }
+        // check whether user already exist or not
         const user = await User.findOne({email});
         if(user){
             return res.status(401).json({
-                message:"This email is already used",
+                message:"User already exists",
                 success:false,
             })
         }
 
         const hashedPassword = await bcryptjs.hash(password,16);
 
+        // if not exist then create user account:
         await User.create({
             fullName,
             email,
@@ -75,7 +77,7 @@ export const Register = async (req,res) =>{
         });
 
         return res.status(201).json({
-            message:"Account created successfully.",
+            message:"Account created successfully",
             success:true,
         })
 

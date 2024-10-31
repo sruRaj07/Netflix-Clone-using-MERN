@@ -7,8 +7,10 @@ import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
 
+// function call to connect the database
 databaseConnection();
 
+// we need to give the path of .env file
 dotenv.config({
     path:".env"
 })
