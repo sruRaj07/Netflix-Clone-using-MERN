@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Header from './Header';
-import axios from "axios";
+import axios from "axios";  // for network calling
 import { API_END_POINT } from '../utils/constant';
 import toast from "react-hot-toast"
 import {useNavigate} from "react-router-dom"
@@ -26,7 +26,7 @@ const Login = () => {
         e.preventDefault();  //prevent the data from get uploaded to local server
         dispatch(setLoading(true));
         if(isLogin){
-            //login
+            //login :  coming data from backend
             const user = {email,password}; 
             try {
                 const res = await axios.post(`${API_END_POINT}/login`, user,{
@@ -47,7 +47,7 @@ const Login = () => {
                 dispatch(setLoading(false));
             }
         }else{
-            //register
+            //register : if the user is not logged in
             dispatch(setLoading(true));
             const user = {fullName, email, password};
             try {
@@ -57,10 +57,12 @@ const Login = () => {
                     },
                     withCredentials:true
                 });
+                // if registered successfully or account created 
                 if(res.data.success){
                     toast.success(res.data.message);
                 }
                 setIsLogin(true);
+                // error in creating account
             } catch (error) {
                 toast.error(error.response.data.message);
                 console.log(error);

@@ -4,7 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 import databaseConnection from "./utils/database.js";
 import cookieParser from "cookie-parser";
-import userRoute from "./routes/userRoute.js";
+import userRoute from "./routes/userRoute.js"; // impor user Routes
 import cors from "cors";
 
 // function call to connect the database
@@ -20,6 +20,8 @@ const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
+
+// defining from where the api request is coming :
 const corsOptions = {
     origin:'http://localhost:3000',
     credentials:true
@@ -27,7 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
  
 // api
-app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user", userRoute); // fetching route from userRoute.js 
 
 app.listen(process.env.PORT,() => {
     console.log(`Server listen at port ${process.env.PORT}`);

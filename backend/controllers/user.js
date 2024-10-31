@@ -2,6 +2,7 @@ import { User } from "../models/userModel.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+// for exporting the log in 
 export const Login = async(req,res)=>{
     try {
         const {email,password} = req.body;
@@ -11,25 +12,30 @@ export const Login = async(req,res)=>{
                 success:false
             })
         };
+        // searching for the user in the database
         const user = await User.findOne({email});
         if(!user){
             return res.status(401).json({
-                message:"Invalid email or password",
+                message:"User doesn't exist",
                 success:false
             });
         }
 
+        // if user exist then compare the passwords:
         const isMatch = await bcryptjs.compare(password, user.password);
         if(!isMatch){
             return res.status(401).json({
-                message:"Invalid email or password",
+                message:"Wrong password",
                 success:false
             });
         }
+
+        // if user exist and password is matched:
        const tokenData = {
         id:user._id
        }
-        const token = await jwt.sign(tokenData, "dfbvdkjzfnvkjzdnfvkzdnjf",{expiresIn:"1h"});
+       // from this token we get to know whether the user logged in or not:
+        const token = await jwt.sign(tokenData, "dfbvdkjzfnvkjzdnfvkzdnjf",{expiresIn:"1d"});
 
         return res.status(200).cookie("token", token).json({
             message:`Welcome back ${user.fullName}`,
@@ -42,13 +48,15 @@ export const Login = async(req,res)=>{
     }
 }
 
+// for exporting Logging Out:
 export const Logout = async (req,res) => {
     return res.status(200).cookie("token", "", {expiresIn:new Date(Date.now()), httpOnly:true}).json({
-        message:"User logged out successfully.",
+        message:"Logged out successfully",
         success:true,
     });
 }
 
+// for exporting the register
 export const Register = async (req,res) =>{
     try {
         const {fullName, email, password} = req.body;
@@ -66,7 +74,8 @@ export const Register = async (req,res) =>{
                 success:false,
             })
         }
-
+        
+        // we are going to encrypt the password before storing it to database
         const hashedPassword = await bcryptjs.hash(password,16);
 
         // if not exist then create user account:
