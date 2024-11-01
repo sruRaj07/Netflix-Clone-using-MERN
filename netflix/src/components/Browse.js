@@ -21,6 +21,7 @@ const Browse = () => {
     useTopRatedMovies();
     useUpcomingMovies();
 
+    // if not a user then navigate to logIn page:
     useEffect(() => {
         if (!user) {
             navigate("/");

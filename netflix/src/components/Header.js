@@ -16,7 +16,8 @@ const Header = () => {
 
     const logoutHandler = async () => {
         try {
-            const res = await axios.get(`${API_END_POINT}/logout`);
+            const res = await axios.get(`${API_END_POINT}/logout`); // we are nt sending any data that's why get method is used
+            // if user logged out successfully: show him the popup
             if(res.data.success){
                 toast.success(res.data.message);
             }

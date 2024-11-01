@@ -11,6 +11,7 @@ const userSlice = createSlice({
         setUser:(state,action)=>{
             state.user = action.payload;
         },
+        // for the loading time: fetching the data(signUp, Login)
         setLoading:(state,action)=>{
             state.isLoading = action.payload;
         }

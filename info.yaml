@@ -4,4 +4,16 @@ express is a framework of node.js;
 
 working up in backend:
 i) create a server
-ii) 
+ii
+
+
+
+after successful log in :
+we are going to use Redux to store the user iformation and based on that we 
+will display content;
+
+based on that information we are going to show content in header
+
+
+first , we configure store
+second, wrap parent componenet </ APP> with store <provider>

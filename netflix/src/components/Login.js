@@ -24,7 +24,7 @@ const Login = () => {
 
     const getInputData = async function(e){
         e.preventDefault();  //prevent the data from get uploaded to local server
-        dispatch(setLoading(true));
+        dispatch(setLoading(true)); // after clicking on login Button: loading strted
         if(isLogin){
             //login :  coming data from backend
             const user = {email,password}; 
@@ -35,20 +35,23 @@ const Login = () => {
                     },
                     withCredentials:true
                 });
+                // if logged in successfully done:
                 if(res.data.success){
                     toast.success(res.data.message);
                 }
                 dispatch(setUser(res.data.user));
+
+                // after login send the user to home page/browse page
                 navigate("/browse");
             } catch (error) {
                 toast.error(error.response.data.message);
                 console.log(error);
             } finally {
-                dispatch(setLoading(false));
+                dispatch(setLoading(false)); // after complete fetching: set loading: false
             }
         }else{
             //register : if the user is not logged in
-            dispatch(setLoading(true));
+            dispatch(setLoading(true)); // redux: storing the user data temporarily
             const user = {fullName, email, password};
             try {
                 const res = await axios.post(`${API_END_POINT}/register`,user,{
@@ -61,7 +64,7 @@ const Login = () => {
                 if(res.data.success){
                     toast.success(res.data.message);
                 }
-                setIsLogin(true);
+                setIsLogin(true); //set the logIn state to true
                 // error in creating account
             } catch (error) {
                 toast.error(error.response.data.message);
