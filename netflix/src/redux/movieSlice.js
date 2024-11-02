@@ -8,7 +8,7 @@ const movieSlice = createSlice({
         topRatedMovies:null,
         upcomingMovies:null,
         toggle:false,
-        trailerMovie:null,  // store movie trailersin redux
+        trailerMovie:null,  // store movie
         open:false,
         id:"",
     },

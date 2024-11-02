@@ -1,4 +1,3 @@
-// display a particular movie:in a card
 import React from 'react'
 import { TMDB_IMG_URL } from '../utils/constant';
 import { useDispatch } from "react-redux";
