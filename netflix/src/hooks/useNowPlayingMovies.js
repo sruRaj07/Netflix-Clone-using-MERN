@@ -1,3 +1,5 @@
+// custom hook to display now playing movies
+
 import axios from "axios";
 import { getNowPlayingMovies } from "../redux/movieSlice";
 import { Now_Playing_Movie, options } from "../utils/constant";

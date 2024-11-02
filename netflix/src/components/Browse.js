@@ -16,10 +16,10 @@ const Browse = () => {
     const navigate = useNavigate();
 
     // my custom hooks
-    useNowPlayingMovies();
-    usePopularMovies();
-    useTopRatedMovies();
-    useUpcomingMovies();
+    useNowPlayingMovies(); // to show now playing movies
+    usePopularMovies();  // to show popular movies
+    useTopRatedMovies(); // show top-rated movies
+    useUpcomingMovies(); // show upcoming movies
 
     // if not a user then navigate to logIn page:
     useEffect(() => {

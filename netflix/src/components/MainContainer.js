@@ -4,7 +4,7 @@ import VideoBackground from './VideoBackground';
 import {useSelector} from "react-redux";
 
 const MainContainer = () => {
-  const movie = useSelector(store=>store.movie?.nowPlayingMovies);
+  const movie = useSelector(store=>store.movie?.nowPlayingMovies);  // access al the movies from redux
   if(!movie) return; // early return in react
  
   const {overview, id, title} = movie[4];
